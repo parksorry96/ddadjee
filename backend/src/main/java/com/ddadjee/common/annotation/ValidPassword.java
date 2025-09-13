@@ -41,11 +41,10 @@ public @interface ValidPassword {
     /** 특수문자 최소 1자 요구 여부 */
     boolean requireSpecial() default true;
 
-    /** 검증 실패 시 기본 메시지 */
-    String message() default "비밀번호 규칙을 만족하지 않습니다.";
+    /** 검증 실패 시 기본 메시지 키 */
+    String message() default "{validation.password.rule}";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 }
-

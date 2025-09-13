@@ -1,6 +1,7 @@
 package com.ddadjee.common.aop;
 
 import com.ddadjee.common.annotation.RateLimiting;
+import com.ddadjee.common.constants.SecurityConstants;
 import com.ddadjee.common.error.BusinessException;
 import com.ddadjee.common.error.ErrorCode;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -41,7 +42,8 @@ public class RateLimitingAspect {
         Method method = ((MethodSignature) pjp.getSignature()).getMethod();
         String baseKey = method.getDeclaringClass().getName() + ":" + method.getName();
         String dynamicPart = evaluateKey(pjp, rateLimiting.key());
-        String key = "rl:" + baseKey + (dynamicPart.isEmpty() ? "" : (":" + dynamicPart));
+        String key = SecurityConstants.RATE_LIMIT_REDIS_KEY_PREFIX
+                + baseKey + (dynamicPart.isEmpty() ? "" : (":" + dynamicPart));
 
         int permits = rateLimiting.permits();
         int windowSeconds = rateLimiting.windowSeconds();
@@ -81,4 +83,3 @@ public class RateLimitingAspect {
         return v == null ? "" : v.toString();
     }
 }
-
