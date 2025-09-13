@@ -1,0 +1,68 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.orig
+*.rej
+.idea/
+.vscode/
+*.code-workspace
+
+# Java / Gradle / Spring
+.gradle/
+build/
+out/
+*.iml
+*.ipr
+*.iws
+
+# Spring local config (keep default application.properties checked in)
+application-local.properties
+application-local.yml
+application-*.yml.local
+application-*.properties.local
+
+# Logs
+*.log
+logs/
+
+# Node / Frontend (Vite + TS)
+node_modules/
+dist/
+.vite/
+coverage/
+.nyc_output/
+*.tsbuildinfo
+*.tsbuildinfo.tmp
+.eslintcache
+.cache/
+
+# Package managers
+.pnpm-store/
+.yarn/**
+!.yarn/patches/
+!.yarn/releases/
+!.yarn/plugins/
+!.yarn/sdks/
+
+# Env / Secrets
+.env
+.env.*
+!.env.example
+
+# Temp
+tmp/
+temp/
+
+# Docker (optional local data)
+.docker/
+docker-data/
+
+# Markdown policy: only README.md files are tracked
+*.md
+!README.md
+!**/README.md
+!readme.md
+!**/readme.md
+
