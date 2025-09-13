@@ -48,7 +48,6 @@ coverage/
 
 # Env / Secrets
 .env
-.env
 !.env
 
 # Temp
