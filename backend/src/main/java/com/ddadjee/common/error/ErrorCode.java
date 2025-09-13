@@ -16,6 +16,7 @@ public enum ErrorCode {
     NOT_FOUND("E404", HttpStatus.NOT_FOUND, "대상을 찾을 수 없습니다."),
     CONFLICT("E409", HttpStatus.CONFLICT, "충돌이 발생했습니다."),
     VALIDATION_ERROR("E422", HttpStatus.UNPROCESSABLE_ENTITY, "검증 오류입니다."),
+    TOO_MANY_REQUESTS("E429", HttpStatus.TOO_MANY_REQUESTS, "요청 한도를 초과하였습니다."),
     INTERNAL_ERROR("E500", HttpStatus.INTERNAL_SERVER_ERROR, "서버 오류가 발생했습니다.");
 
     /** 외부 노출용 오류 코드 문자열 (예: E422) */
