@@ -48,8 +48,8 @@ coverage/
 
 # Env / Secrets
 .env
-.env.*
-!.env.example
+.env
+!.env
 
 # Temp
 tmp/

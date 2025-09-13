@@ -1,0 +1,86 @@
+# ==============================================================================
+# ddadjee – Spring Boot Application Configuration
+# - Base config is safe for local dev using docker-compose (Postgres/Redis).
+# - Enable OAuth2 Resource Server by activating profile: `oidc`.
+#   ex) SPRING_PROFILES_ACTIVE=oidc
+# - Swagger/OpenAPI UI available at /swagger (api docs at /api-docs).
+# ==============================================================================
+
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: backend
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:${POSTGRES_PORT:5432}/${POSTGRES_DB:ddadjee}}
+    username: ${POSTGRES_USER:ddadjee}
+    password: ${POSTGRES_PASSWORD:ddadjee}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update  # dev only; switch to validate in CI/prod
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: false
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+  mvc:
+    problemdetails:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,metrics,httpexchanges,loggers,beans,threaddump"
+  endpoint:
+    health:
+      show-details: when_authorized
+
+# --- SpringDoc OpenAPI / Swagger ------------------------------------------------
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger
+    operationsSorter: method
+    tagsSorter: alpha
+    displayRequestDuration: true
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  packages-to-scan: com.ddadjee
+  paths-to-match: /api/**
+
+logging:
+  level:
+    org.springframework: INFO
+    org.springframework.security: INFO
+
+---
+# Activate this profile to enable JWT (OAuth2 Resource Server) via OIDC issuer.
+# Usage:
+#   export SPRING_PROFILES_ACTIVE=oidc
+#   export OAUTH2_ISSUER_URI="https://YOUR_IDP/.well-known/openid-configuration issuer"
+# or set OAUTH2_JWK_SET_URI to skip OIDC discovery.
+spring:
+  config:
+    activate:
+      on-profile: oidc
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # Prefer issuer-uri (discovers JWK set automatically). The default
+          # value below is harmless; network calls occur only when decoding a JWT.
+          issuer-uri: ${OAUTH2_ISSUER_URI:http://localhost/issuer}
+          # Alternative (optional): provide JWK set URI directly
+          jwk-set-uri: ${OAUTH2_JWK_SET_URI:}
