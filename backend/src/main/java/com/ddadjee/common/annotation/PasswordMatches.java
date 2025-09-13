@@ -28,10 +28,9 @@ public @interface PasswordMatches {
     /** 비교할 두 번째 필드명 */
     String second();
 
-    String message() default "두 필드 값이 일치하지 않습니다.";
+    String message() default "{validation.password.mismatch}";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 }
-
