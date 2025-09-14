@@ -48,7 +48,8 @@ coverage/
 
 # Env / Secrets
 .env
-!.env
+.env.*
+!.env.example
 
 # Temp
 tmp/
@@ -64,4 +65,3 @@ docker-data/
 !**/README.md
 !readme.md
 !**/readme.md
-
