@@ -1,17 +1,22 @@
 package com.ddadjee.iam.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+
 import java.time.Clock;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Getter
 public final class User {
     private final UUID id;
     private final Email email;
     private final Username username;
     private final String hashedPassword;
     private final Instant createdAt;
+    @Getter(AccessLevel.NONE)
     private final List<Object> domainEvents = new ArrayList<>();
 
     private User(UUID id, Email email, Username username, String hashedPassword, Instant createdAt) {
@@ -62,5 +67,18 @@ public final class User {
         List<Object> out= new ArrayList<>(domainEvents);
         domainEvents.clear();
         return out;
+    }
+
+    /**
+     * Persistence -> Domain 복원용 메소드
+     */
+    public static User rehydrate(UUID id, Email email, Username username, String hashedPassword, Instant createdAt){
+        if(id==null)throw new IllegalArgumentException("id cannot be null");
+        if(email==null)throw new IllegalArgumentException("email cannot be null");
+        if(username==null)throw new IllegalArgumentException("username cannot be null");
+        if(hashedPassword==null)throw new IllegalArgumentException("hashed password cannot be null");
+        if(createdAt==null)throw new IllegalArgumentException("createdAt cannot be null");
+        return new User(id, email, username, hashedPassword, createdAt);
+
     }
 }
