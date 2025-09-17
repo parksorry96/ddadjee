@@ -1,5 +1,7 @@
 package com.ddadjee.iam.application.service;
 
+import com.ddadjee.common.annotation.UseCase;
+import com.ddadjee.common.annotation.UseCase;
 import com.ddadjee.common.error.BusinessException;
 import com.ddadjee.common.error.ErrorCode;
 import com.ddadjee.iam.application.port.in.RegisterUserCommand;
