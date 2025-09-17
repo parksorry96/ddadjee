@@ -12,7 +12,8 @@ Thumbs.db
 # Java / Gradle / Spring
 .gradle/
 build/
-out/
+# IMPORTANT: anchor 'out/' to repo root to avoid ignoring source packages like 'application/port/out'
+/out/
 *.iml
 *.ipr
 *.iws
@@ -59,9 +60,12 @@ temp/
 .docker/
 docker-data/
 
-# Markdown policy: only README.md files are tracked
+# Markdown policy: only README.md files are tracked, with explicit exceptions for project docs
 *.md
 !README.md
 !**/README.md
 !readme.md
 !**/readme.md
+# Allow agent/process docs that we want under version control
+AGENTS.md
+docs/PROGRESS.md
