@@ -1,17 +1,22 @@
 package com.ddadjee.iam.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+
 import java.time.Clock;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Getter
 public final class User {
     private final UUID id;
     private final Email email;
     private final Username username;
     private final String hashedPassword;
     private final Instant createdAt;
+    @Getter(AccessLevel.NONE)
     private final List<Object> domainEvents = new ArrayList<>();
 
     private User(UUID id, Email email, Username username, String hashedPassword, Instant createdAt) {

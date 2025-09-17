@@ -1,8 +1,12 @@
 package com.ddadjee.iam.domain;
 
-import java.util.Objects;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import static com.ddadjee.common.constants.RegexConstants.*;
+
+@Getter
+@EqualsAndHashCode
 public final class Username {
     private final String value;
 
@@ -14,19 +18,6 @@ public final class Username {
             throw new IllegalArgumentException("invalid username");
         }
         this.value = value;
-    }
-    public String getValue() {
-        return value;
-    }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if(!(o instanceof Username username)) return false;
-        return value.equals(username.value);
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
     }
     @Override
     public String toString() {
