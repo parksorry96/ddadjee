@@ -2,6 +2,7 @@ package com.ddadjee.iam.adapters.in.rest.user;
 
 import com.ddadjee.common.web.ApiResponse;
 import com.ddadjee.iam.application.port.in.RegisterUserUseCase;
+import com.ddadjee.iam.domain.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -31,7 +32,7 @@ public class UserRegistrationController {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "회원가입")
     public ApiResponse<RegisterUserResponse> register(@Valid @RequestBody RegisterUserRequest request) {
-        var savedUser = registerUserUseCase.register(toCommand(request));
+        User savedUser = registerUserUseCase.register(toCommand(request));
         return ApiResponse.ok(toResponse(savedUser), "회원가입이 완료되었습니다.");
     }
 }
