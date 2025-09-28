@@ -18,4 +18,9 @@ public class PasswordEncoderPasswordHasher implements PasswordHasherPort {
     public String hash(String rawPassword) {
         return encoder.encode(rawPassword);
     }
+
+    @Override
+    public boolean matches(String rawPassword, String hashedPassword) {
+        return encoder.matches(rawPassword, hashedPassword);
+    }
 }
