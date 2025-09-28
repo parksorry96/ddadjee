@@ -32,6 +32,6 @@ public final class MessageKeys {
     /** 도메인별 예시 (필요 시 확장) */
     public static final String IAM_USER_ALREADY_EXISTS = "iam.user.alreadyExists";
     public static final String IAM_USER_NOT_FOUND = "iam.user.notFound";
+    public static final String IAM_USER_INVALID_CREDENTIALS = "iam.user.invalidCredentials";
     public static final String CATALOG_CERT_NOT_FOUND = "catalog.certification.notFound";
 }
-

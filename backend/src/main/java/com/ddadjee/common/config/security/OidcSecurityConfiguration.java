@@ -37,6 +37,7 @@ public class OidcSecurityConfiguration {
                                 "/v3/api-docs/**", 
                                 "/actuator/**"
                         ).permitAll()
+                        .requestMatchers("/api/iam/users/login").permitAll()
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().permitAll()
                 )
@@ -48,4 +49,3 @@ public class OidcSecurityConfiguration {
         return http.build();
     }
 }
-
